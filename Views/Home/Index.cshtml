@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "POST"
             });
 
-            const data = await response.json(); 
+            const data = await response.json();
+            
 
             button.textContent = `❤️ ${data.likes}`;
 

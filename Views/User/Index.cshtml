@@ -26,8 +26,8 @@
         @foreach (var post in Model.Posts)
         {
             <div class="col-4">
-
-                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                
+                <a asp-controller="User" asp-action="PostedImage" asp-route-id="@post.Id" asp-route-postId="@Model.Id">
                     <img src="@post.ImageUrl"
                          class="img-fluid rounded"
                          style="object-fit: cover; height: 150px; width: 100%;">
