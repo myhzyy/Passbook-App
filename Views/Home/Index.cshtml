@@ -1,0 +1,80 @@
+﻿@model List<Pawbook.Models.IndexPageDto>
+
+<div class="container mt-4 mb-5" style="max-width: 600px;">
+
+    @foreach (var post in Model)
+    {
+        <article class="card mb-4 shadow-sm border-0">
+
+            <!-- Header -->
+            <a asp-controller="User" asp-action="Index" asp-route-id="@post.UserId">
+            <div class="card-header bg-white border-0 d-flex align-items-center">
+                <div class="rounded-circle bg-secondary me-2"
+                     style="width:32px; height:32px;"></div>
+
+                <span class="fw-semibold">@post.UserName</span>
+            </div>
+            </a>
+
+            <!-- Image -->
+            <img src="@post.ImageUrl"
+                 alt="Post from @post.UserName"
+                 class="card-img-top"
+                 style="object-fit: cover; max-height: 500px;">
+     
+            
+            <!-- Body -->
+            <div class="card-body">
+
+                <!-- Action row -->
+                <div class="mb-2 d-flex gap-3">
+                    
+                
+                    <span role="button" data-id="@post.Id" class="like-button">❤️ @post.Likes</span>
+                    
+                    <span role="button">💬</span>
+                    <span role="button">📤</span>
+                </div>
+
+                <!-- Caption -->
+                <p class="card-text mb-1">
+                    <span class="fw-semibold me-1">@post.UserName</span>
+                    @post.Caption
+                </p>
+
+                <!-- Timestamp -->
+                <small class="text-muted">Just now</small>
+            </div>
+            
+        </article>
+    }
+    
+    <button>Upload</button>
+
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".like-button").forEach(button => { ///
+
+        button.addEventListener("click", async () => {
+
+            const postId = button.dataset.id;
+
+            const response = await fetch(`/Home/LikePost?id=${postId}`, {
+                method: "POST"
+            });
+
+            const data = await response.json(); 
+
+            button.textContent = `❤️ ${data.likes}`;
+
+            console.log("Post returned from server:", data);
+        });
+
+    });
+
+});
+</script>

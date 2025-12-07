@@ -1,0 +1,40 @@
+@model Pawbook.Models.User
+
+<div class="container mt-4" style="max-width: 800px;">
+
+    <!-- Profile Header -->
+    <div class="d-flex align-items-center mb-4">
+        
+        <!-- Profile Photo -->
+        <div class="rounded-circle bg-secondary"
+             style="width: 100px; height: 100px;"></div>
+
+        <div class="ms-4">
+            <h2 class="mb-1">@Model.Username</h2>
+            <p class="text-muted mb-1">
+                @Model.Breed • @Model.Gender • Age: @Model.Age
+            </p>
+            <p class="fw-semibold mb-0">@Model.Posts.Count posts</p>
+        </div>
+
+    </div>
+
+    <hr />
+
+    <!-- Posts Grid -->
+    <div class="row g-3 mt-3">
+        @foreach (var post in Model.Posts)
+        {
+            <div class="col-4">
+
+                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                    <img src="@post.ImageUrl"
+                         class="img-fluid rounded"
+                         style="object-fit: cover; height: 150px; width: 100%;">
+                </a>
+
+            </div>
+        }
+    </div>
+
+</div>

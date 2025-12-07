@@ -1,0 +1,22 @@
+@model List<Pawbook.Models.User>
+
+<h1>Upload</h1>
+
+<form method="post" class="border border-danger" asp-controller="Upload" asp-action="UploadImage">
+
+<select class="form-select" name="userId">
+    
+    @foreach (var user in Model)
+    {
+        <option value="@user.Id">@user.Username</option>
+    }
+</select>
+
+<h2>Upload post</h2>
+
+<input name="ImageUrl" placeholder="imageUrl"/>
+<input name="Caption" placeholder="Caption"/>
+
+<button>Submit</button>
+    
+</form>
